@@ -57,8 +57,8 @@ def set_css():
 # Adicionar o CSS personalizado para o tamanho da fonte
 set_css()
 
-pathProd = ''
-#pathProd = 'predict_service/'
+#pathProd = ''
+pathProd = 'predict_service/'
 
 # Função para carregar o modelo, tentando ambos os formatos (.pkl e .h5)
 import os
@@ -85,11 +85,6 @@ def carregar_modelo(joblib_path, keras_path):
 
 def calcular_previsoes_ahu(model_staMedia_ahu0302, scaler_staMedia_ahu0302, model_ti_ahu0302, scaler_ti_ahu0302):
     
-    # input_data_TI = np.array([[vagAhu, FimDeSemana]])
-    # input_data_scaled_TI = scaler_ti_ahu0302.transform(input_data_TI)
-    # previsaoTI = model_ti_ahu0302.predict(input_data_scaled_TI).flatten()
-
-
     input_data_staMedia = np.array([[pressao, temperatura, previsaoTI, vagAhu]])
     input_data_scaled_staMedia = scaler_staMedia_ahu0302.transform(input_data_staMedia)
     previsaostaMedia = model_staMedia_ahu0302.predict(input_data_scaled_staMedia).flatten()
@@ -192,9 +187,9 @@ scaler_ti_ahu0302 = joblib.load(f'{pathProd}ModelsDeploy/AHU-03-02/TI/scaler.pkl
 st.sidebar.title("Parâmetros de Entrada")
 
 # Sliders para os parâmetros de entrada
-pressao = st.sidebar.number_input('Pressão (mB)', min_value=900.0, max_value=1030.0, value=float(pressao_real), key="pressao_input")
-temperatura = st.sidebar.number_input('Temperatura (°C)', min_value=15.0, max_value=40.0, value=float(temperatura_real), key="temperatura_input")
-umidade = st.sidebar.number_input('Umidade (%)', min_value=0.0, max_value=100.0, value=float(umidade_real), key="umidade_input")
+pressao = st.sidebar.text_input('Pressão (mB)', value=str(pressao_real), key="pressao_input")
+temperatura = st.sidebar.text_input('Temperatura (°C)', value=str(temperatura_real), key="temperatura_input")
+umidade = st.sidebar.text_input('Umidade (%)', value=str(umidade_real), key="umidade_input")
 FimDeSemana = st.sidebar.selectbox('Fim de Semana', [0, 1], index=final_de_semana_real, key="fim_de_semana_input")
 HorarioComercial = st.sidebar.selectbox('Horário Comercial', [0, 1], index=horario_comercial_real, key="horario_comercial_input")
 
@@ -204,7 +199,8 @@ tab1, tab2, tab3, tab4 = st.tabs(["Chiller 1", "Chiller 2", "Comparativo", "AHU-
 # Aba Chiller 1
 with tab1:
     st.markdown('<h1 class="custom-title">Previsões de Desempenho - Chiller 1</h1>', unsafe_allow_html=True)
-    ur_temp_saida = st.number_input('Temperatura de Saída (°C)', min_value=4.5, max_value=20.0, value=9.5, key="ur_temp_saida_chiller1")
+    ur_temp_saida = st.text_input('Temperatura de Saída (°C)', value=9.5, key="ur_temp_saida_chiller1")
+
    
     previsaoCorrente, previsaoVAG, previsaoLigados, previsaodeltaAC, previsaoTR, previsaoKWH, previsaoTorre3 = calcular_previsoes(
         scaler_corrente_chiller1, scaler_deltaAC_chiller1, scaler_Ligados_chiller1, 
@@ -232,7 +228,7 @@ with tab1:
 # Aba Chiller 2
 with tab2:
     st.markdown('<h1 class="custom-title">Previsões de Desempenho - Chiller 2</h1>', unsafe_allow_html=True)
-    ur_temp_saida = st.number_input('Temperatura de Saída (°C)', min_value=4.5, max_value=20.0, value=9.5, key="ur_temp_saida_chiller2")
+    ur_temp_saida = st.text_input('Temperatura de Saída (°C)', value=9.5, key="ur_temp_saida_chiller2")
 
     previsaoCorrente_2, previsaoVAG_2, previsaoLigados_2, previsaodeltaAC_2, previsaoTR_2, previsaoKWH_2, previsaoTorre3_2 = calcular_previsoes(
         scaler_corrente_chiller2, scaler_deltaAC_chiller2, scaler_Ligados_chiller2, 
