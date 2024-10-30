@@ -180,11 +180,6 @@ scaler_staMedia_ahu0302 = joblib.load(f'{pathProd}ModelsDeploy/AHU-03-02/STA_med
 model_ti_ahu0302 = carregar_modelo(f'{pathProd}ModelsDeploy/AHU-03-02/TI/model.pkl', f'{pathProd}ModelsDeploy/AHU-03-02/TI/model.h5')
 scaler_ti_ahu0302 = joblib.load(f'{pathProd}ModelsDeploy/AHU-03-02/TI/scaler.pkl')
 
-
-
-
-
-
 # Ajustar o layout: sliders na lateral
 st.sidebar.title("Parâmetros de Entrada")
 
@@ -304,9 +299,12 @@ with tab4:
     st.markdown('<h1 class="custom-title">Previsões de Desempenho - AHU-03-02</h1>', unsafe_allow_html=True)
 
     # Número de entrada para VAG AHU (%) apenas na aba AHU-03-02
-    vagAhu = st.number_input('VAG AHU (%)', min_value=0.0, max_value=100.0, value=76.0, key="vagAhu_ahu")
-    previsaoTI = st.number_input('Insuflamento (°C)', min_value=10.0, max_value=18.0, value=15.0, key="previsaoTI_ahu")
+    #vagAhu = st.number_input('VAG AHU (%)', min_value=0.0, max_value=100.0, value=76.0, key="vagAhu_ahu")
+    #previsaoTI = st.number_input('Insuflamento (°C)', min_value=10.0, max_value=18.0, value=15.0, key="previsaoTI_ahu")
 
+    vagAhu = st.text_input('VAG AHU (%)', value=50, key="vagAhu_ahu")
+    previsaoTI = st.text_input('Insuflamento (°C)', value=15, key="previsaoTI_ahu")
+    
     previsaostaMedia, previsaoTI = calcular_previsoes_ahu(model_staMedia_ahu0302, scaler_staMedia_ahu0302, model_ti_ahu0302, scaler_ti_ahu0302)
 
     resultados_3 = pd.DataFrame({
