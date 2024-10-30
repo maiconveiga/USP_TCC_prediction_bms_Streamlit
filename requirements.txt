@@ -1,4 +1,4 @@
-﻿absl-py==2.1.0
+absl-py==2.1.0
 altair==5.4.1
 astunparse==1.6.3
 attrs==24.2.0
@@ -44,7 +44,7 @@ packaging==24.1
 pandas==2.2.3
 pillow==10.4.0
 plotly==5.24.1
-protobuf
+protobuf<5.0.0,>=3.20.3
 pyarrow==18.0.0
 pydeck==0.9.1
 Pygments==2.18.0
@@ -62,7 +62,7 @@ six==1.16.0
 smmap==5.0.1
 streamlit==1.39.0
 tenacity==9.0.0
-tensorboard==2.18.0
+tensorboard<2.17,>=2.16
 tensorboard-data-server==0.7.2
 tensorflow==2.16.2
 termcolor==2.5.0
