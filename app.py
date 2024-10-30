@@ -58,7 +58,7 @@ def set_css():
 set_css()
 
 #pathProd = ''
-pathProd = 'predict_service/'
+pathProd = 'USP_TCC_prediction_bms_Streamlit/'
 
 # Função para carregar o modelo, tentando ambos os formatos (.pkl e .h5)
 import os
