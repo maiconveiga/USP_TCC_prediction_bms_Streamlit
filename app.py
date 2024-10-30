@@ -7,6 +7,9 @@ from tensorflow.keras.models import load_model
 import requests
 from datetime import datetime
 
+pathProd = ''
+#pathProd = 'USP_TCC_prediction_bms_Streamlit/'
+
 def verificar_data_horario():
 
     # Pega a data e hora atual
@@ -57,8 +60,7 @@ def set_css():
 # Adicionar o CSS personalizado para o tamanho da fonte
 set_css()
 
-#pathProd = ''
-pathProd = 'USP_TCC_prediction_bms_Streamlit/'
+
 
 # Função para carregar o modelo, tentando ambos os formatos (.pkl e .h5)
 import os
